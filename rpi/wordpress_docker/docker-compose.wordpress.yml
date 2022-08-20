@@ -7,7 +7,8 @@ networks:
 services:
   mysql_wordpress:
     container_name: ${WORDPRESS_MYSQL_CONTAINER}
-    image: mysql:${WORDPRESS_MYSQL_VERSION}
+    # image: mysql:${WORDPRESS_MYSQL_VERSION}
+    image: mysql
     volumes:
       - site_db_data:/var/lib/mysql
     networks:
