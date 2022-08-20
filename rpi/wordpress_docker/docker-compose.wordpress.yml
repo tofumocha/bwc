@@ -53,8 +53,8 @@ services:
         hard: 40000
     volumes:
       - metricslab_wordpress_data:/var/www/html
-      - ${WORDPRESS_NGINX_CONF_D_PATH}
-      - ${NGINX_SSL_CERT_PATH}
+      - ${NGINX_TEMPLATE}
+      - ${NGINX_SSL_CERT}
     networks:
       - okapia-network
 
