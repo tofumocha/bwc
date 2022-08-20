@@ -9,7 +9,7 @@ services:
     container_name: ${WORDPRESS_MYSQL_CONTAINER}
     image: mysql:${WORDPRESS_MYSQL_VERSION}
     volumes:
-      - $(SITE_FQDN}_db_data:/var/lib/mysql
+      - site_db_data:/var/lib/mysql
     networks:
       - okapia-network
     restart: always
@@ -25,7 +25,7 @@ services:
       - mysql_wordpress
     image: wordpress:${WORDPRESS_VERSION}
     volumes:
-      - $(SITE_FQDN}_wordpress_data:/var/www/html
+      - site_wordpress_data:/var/www/html
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     networks:
       - okapia-network
