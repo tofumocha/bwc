@@ -2,11 +2,11 @@ version: "3.9"
 networks:
   okapia-network:
     driver: bridge
-    name: ${DOCKER_NETWORK_NAME}
+    name: ${DOCKER_NETWORK}
     
 services:
   mysql_wordpress:
-    container_name: ${WORDPRESS_MYSQL_CONTAINER_NAME}
+    container_name: ${WORDPRESS_MYSQL_CONTAINER}
     image: mysql:${WORDPRESS_MYSQL_VERSION}
     volumes:
       - $(SITE_FQDN}_db_data:/var/lib/mysql
@@ -15,12 +15,12 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${WORDPRESS_MYSQL_DB_PASSW}
-      MYSQL_DATABASE: ${WORDPRESS_MYSQL_DB_NAME}
+      MYSQL_DATABASE: ${WORDPRESS_MYSQL_DB}
       MYSQL_USER: ${WORDPRESS_MYSQL_DB_USER}
       MYSQL_PASSWORD: ${WORDPRESS_MYSQL_DB_PASSW}
     
   wordpress:
-    container_name: ${WORDPRESS_CONTAINER_NAME}
+    container_name: ${WORDPRESS_CONTAINER}
     depends_on:
       - mysql_wordpress
     image: wordpress:${WORDPRESS_VERSION}
@@ -31,17 +31,17 @@ services:
       - okapia-network
     restart: always
     environment:
-      WORDPRESS_DB_HOST: ${WORDPRESS_MYSQL_CONTAINER_NAME}
+      WORDPRESS_DB_HOST: ${WORDPRESS_MYSQL_CONTAINER}
       WORDPRESS_DB_USER: ${WORDPRESS_MYSQL_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_MYSQL_DB_PASSW}
-      WORDPRESS_DB_NAME: ${WORDPRESS_MYSQL_DB_NAME}
+      WORDPRESS_DB: ${WORDPRESS_MYSQL_DB}
 
 
   webserver:
     depends_on:
       - wordpress
     image: nginx:${WORDPRESS_NGINX_VERSION}
-    container_name: ${WORDPRESS_NGINX_CONTAINER_NAME}
+    container_name: ${WORDPRESS_NGINX_CONTAINER}
     ports:
       - ${SITE_IP_1}:80:80
       - ${SITE_IP_1}:443:443
