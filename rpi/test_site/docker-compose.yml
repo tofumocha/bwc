@@ -14,10 +14,10 @@ services:
       MYSQL_PASSWORD: user_pass
     restart: always
   wordpress:
-    image: wordpress:php7.3-fpm-alpine
+    image: wordpress:php7.4-fpm
     volumes:
       # - /data/html:/var/www/html
-      - ./nginx.conf:/etc/nginx/templates
+      # - ./nginx.conf:/etc/nginx/templates
       - site_wordpress_data:/var/www/html
     depends_on:
       - mysql
