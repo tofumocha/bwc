@@ -36,6 +36,8 @@ services:
       WORDPRESS_DB_USER: ${WORDPRESS_MYSQL_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_MYSQL_DB_PASSW}
       WORDPRESS_DB: ${WORDPRESS_MYSQL_DB}
+    ports:
+      - ${SITE_IP_1}:80:80
 
 
   webserver:
@@ -45,15 +47,12 @@ services:
     container_name: ${WORDPRESS_NGINX_CONTAINER}
     environment:
       TZ: America/New_York
-      # HOST IP ADDRESS:
       ENV_IP: ${SITE_IP_1}
-      # SERVER NAME VARIABLES:
       WORDPRESS_SERVER: ${WORDPRESS_SERVER}
-      # PORT VARIABLES:
-      # APPBUILDER_EXTERNAL_PORT: ${APPBUILDER_EXTERNAL_PORT}
+
     
     ports:
-      - ${SITE_IP_1}:80:80
+      # - ${SITE_IP_1}:80:80
       - ${SITE_IP_1}:443:443
     restart: always
     ulimits:
