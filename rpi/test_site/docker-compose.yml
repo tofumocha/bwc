@@ -4,7 +4,8 @@ services:
     # image: mariadb
     image: jsurf/rpi-mariadb
     volumes:
-      - /data/mysql:/var/lib/mysql
+      # - /data/mysql:/var/lib/mysql
+      - site_db_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: mysql_root_pass
       MYSQL_DATABASE: db_name
@@ -14,7 +15,9 @@ services:
   wordpress:
     image: wordpress:php7.3-fpm-alpine
     volumes:
-      - /data/html:/var/www/html
+      # - /data/html:/var/www/html
+      - ./nginx.conf:/etc/nginx/templates
+      - site_wordpress_data:/var/www/html
     depends_on:
       - mysql
     environment:
@@ -31,8 +34,12 @@ services:
     image: nginx:alpine
     volumes:
       - nginx:/etc/nginx/conf.d
-      - /data/html:/var/www/html
+      # - /data/html:/var/www/html
+      - site_wordpress_data:/var/www/html
     ports:
       - 8080:80
     links:
       - wordpress
+volumes:
+  site_db_data: {}
+  site_wordpress_data: {}
