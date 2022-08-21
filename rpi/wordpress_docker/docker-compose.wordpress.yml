@@ -48,6 +48,8 @@ services:
       TZ: America/New_York
       WORDPRESS_SERVER: ${WORDPRESS_SERVER}
       WORDPRESS_CONTAINER: ${WORDPRESS_CONTAINER}
+      NGINX_CRT_PATH: ${NGINX_CRT_PATH}
+      NGINX_KEY_PATH: ${NGINX_KEY_PATH}
     ports:
       - ${SITE_IP_1}:80:80
       - ${SITE_IP_1}:443:443
