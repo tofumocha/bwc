@@ -43,6 +43,15 @@ services:
       - wordpress
     image: nginx:${WORDPRESS_NGINX_VERSION}
     container_name: ${WORDPRESS_NGINX_CONTAINER}
+    environment:
+      TZ: America/New_York
+      # HOST IP ADDRESS:
+      ENV_IP: ${SITE_IP_1}
+      # SERVER NAME VARIABLES:
+      APPBUILDER_CONTAINER_NAME: ${APPBUILDER_CONTAINER_NAME}
+      # PORT VARIABLES:
+      APPBUILDER_EXTERNAL_PORT: ${APPBUILDER_EXTERNAL_PORT}
+    
     ports:
       - ${SITE_IP_1}:80:80
       - ${SITE_IP_1}:443:443
