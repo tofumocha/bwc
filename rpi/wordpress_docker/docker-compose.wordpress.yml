@@ -37,7 +37,7 @@ services:
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_MYSQL_DB_PASSW}
       WORDPRESS_DB: ${WORDPRESS_MYSQL_DB}
     ports:
-      - ${SITE_IP_1}:9000:80
+      - ${SITE_IP_1}:9000:9000
 
 
   webserver:
