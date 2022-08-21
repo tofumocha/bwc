@@ -1,10 +1,8 @@
 version: '3'
 services:
   mysql:
-    # image: mariadb
     image: jsurf/rpi-mariadb
     volumes:
-      # - /data/mysql:/var/lib/mysql
       - site_db_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: mysql_root_pass
@@ -15,8 +13,6 @@ services:
   wordpress:
     image: wordpress:php7.4-fpm
     volumes:
-      # - /data/html:/var/www/html
-      # - ./nginx.conf:/etc/nginx/templates
       - site_wordpress_data:/var/www/html
     depends_on:
       - mysql
@@ -35,7 +31,6 @@ services:
     volumes:
       - nginx:/etc/nginx/conf.d
       - ./nginx-tofumocha.conf:/etc/nginx/conf.d/nginx-tofumocha.conf
-      # - /data/html:/var/www/html
       - site_wordpress_data:/var/www/html
     ports:
       - 10.0.1.15:8080:80
