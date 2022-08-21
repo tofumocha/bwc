@@ -38,9 +38,7 @@ services:
       WORDPRESS_DB_USER: ${WORDPRESS_MYSQL_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_MYSQL_DB_PASSW}
       WORDPRESS_DB: ${WORDPRESS_MYSQL_DB}
-    ports:
-      - ${SITE_IP_1}:9000:9000
-
+      WORDPRESS_TABLE_PREFIX: wp_
 
   webserver:
     depends_on:
@@ -49,10 +47,7 @@ services:
     container_name: ${WORDPRESS_NGINX_CONTAINER}
     environment:
       TZ: America/New_York
-      # ENV_IP: ${SITE_IP_1}
       WORDPRESS_SERVER: ${WORDPRESS_SERVER}
-
-    
     ports:
       - ${SITE_IP_1}:80:80
       - ${SITE_IP_1}:443:443
