@@ -48,6 +48,7 @@ services:
     environment:
       TZ: America/New_York
       WORDPRESS_SERVER: ${WORDPRESS_SERVER}
+      WORDPRESS_CONTAINER: ${WORDPRESS_CONTAINER}
     ports:
       - ${SITE_IP_1}:80:80
       - ${SITE_IP_1}:443:443
