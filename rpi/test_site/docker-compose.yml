@@ -43,3 +43,4 @@ services:
 volumes:
   site_db_data: {}
   site_wordpress_data: {}
+  nginx: {}
