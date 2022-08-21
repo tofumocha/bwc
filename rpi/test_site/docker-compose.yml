@@ -3,7 +3,7 @@ services:
   mysql:
     # image: mariadb
     image: jsurf/rpi-mariadb
-    # container_name: my_db
+    container_name: my_db
     volumes:
       # - /data/mysql:/var/lib/mysql
       - site_db_data:/var/lib/mysql
@@ -22,7 +22,7 @@ services:
     depends_on:
       - mysql
     environment:
-      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_HOST: my_db
       MYSQL_ROOT_PASSWORD: mysql_root_pass
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_USER: user_name
@@ -39,7 +39,7 @@ services:
       # - /data/html:/var/www/html
       - site_wordpress_data:/var/www/html
     ports:
-      - 8080:80
+      - 10.0.1.15:8080:80
     links:
       - wordpress
 volumes:
