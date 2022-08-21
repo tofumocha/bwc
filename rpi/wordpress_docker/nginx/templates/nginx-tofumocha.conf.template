@@ -38,7 +38,7 @@ server {
   }
   # pass the PHP scripts to FastCGI server listening on wordpress:9000
   location ~ \.php$ {
-    set $upstream ${WORDPRESS_SERVER}:9000;
+    set $upstream ${WORDPRESS_SERVER}:80;
     fastcgi_split_path_info ^(.+\.php)(/.+)$;
     fastcgi_pass $upstream;
     fastcgi_index index.php;
