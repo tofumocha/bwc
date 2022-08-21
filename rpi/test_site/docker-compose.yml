@@ -34,6 +34,7 @@ services:
     image: nginx
     volumes:
       - nginx:/etc/nginx/conf.d
+      - ./nginx-tofumocha.conf:/etc/nginx/conf.d/nginx-tofumocha.conf
       # - /data/html:/var/www/html
       - site_wordpress_data:/var/www/html
     ports:
