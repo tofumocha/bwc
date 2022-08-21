@@ -15,6 +15,7 @@ services:
       - okapia-network
     restart: always
     environment:
+      TZ: America/New_York
       MYSQL_ROOT_PASSWORD: ${WORDPRESS_MYSQL_DB_PASSW}
       MYSQL_DATABASE: ${WORDPRESS_MYSQL_DB}
       MYSQL_USER: ${WORDPRESS_MYSQL_DB_USER}
@@ -32,6 +33,7 @@ services:
       - okapia-network
     restart: always
     environment:
+      TZ: America/New_York
       WORDPRESS_DB_HOST: ${WORDPRESS_MYSQL_CONTAINER}
       WORDPRESS_DB_USER: ${WORDPRESS_MYSQL_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_MYSQL_DB_PASSW}
