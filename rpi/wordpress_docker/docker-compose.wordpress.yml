@@ -67,5 +67,5 @@ services:
       - okapia-network
 
 volumes:
-  site_db_data: {}
-  site_wordpress_data: {}
+ ${COMPOSE_PROJECT}_site_db_data: {}
+${COMPOSE_PROJECT}_site_wordpress_data: {}
