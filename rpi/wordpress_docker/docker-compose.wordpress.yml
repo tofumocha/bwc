@@ -9,7 +9,7 @@ services:
     container_name: ${WORDPRESS_MYSQL_CONTAINER}
     image: ${WORDPRESS_MYSQL_VERSION}
     volumes:
-      - db_data:/var/lib/mysql
+      - site_db_data:/var/lib/mysql
     networks:
       - okapia-network
     restart: always
