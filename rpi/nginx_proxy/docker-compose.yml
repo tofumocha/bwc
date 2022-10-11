@@ -1,0 +1,17 @@
+version: "3.9"
+networks:
+  okapia-network:
+    driver: bridge
+    name: ${DOCKER_NETWORK}
+services:
+  web_proxy:
+    container_name: tofumochacom_proxy
+    image: nginx
+    volumes:
+    - ./templates:/etc/nginx/templates
+    ports:
+    - ${SITE_IP}:80:80
+    #  - 10.0.1.18:443:443
+    environment:
+    - NGINX_HOST=tofumocha.com
+    - NGINX_PORT=80
