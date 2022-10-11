@@ -1,8 +1,11 @@
 version: "3.9"
+# networks:
+#   okapia-network:
+#     driver: bridge
+#     name: ${DOCKER_NETWORK}
 networks:
-  okapia-network:
-    driver: bridge
-    name: ${DOCKER_NETWORK}
+  ${DOCKER_NETWORK}:
+    external: true  
 services:
   web_proxy:
     container_name: tofumochacom_proxy
