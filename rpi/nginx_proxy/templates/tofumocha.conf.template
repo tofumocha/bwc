@@ -4,6 +4,6 @@ server {
   }
 
   server {
-    server_name koan.tofumocha.com;
+    server_name home.tofumocha.com;
     return 301 http://home.tofumocha.com_nginx$request_uri;
   }
