@@ -83,7 +83,7 @@ services:
         soft: 32000
         hard: 40000
     volumes:
-      - site_wordpress_data:/var/www/html
+      - koan_wordpress_data:/var/www/html
       - ${NGINX_TEMPLATE}
       - ${NGINX_SSL_CERT}
     networks:
