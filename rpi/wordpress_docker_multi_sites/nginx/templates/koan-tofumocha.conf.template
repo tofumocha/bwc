@@ -8,7 +8,7 @@ server {
   listen 443 ssl http2;
   listen [::]:443 ssl http2;
   access_log off;
-  {% comment %} root /var/www/${KOAN_WP_SERVER}; {% endcomment %}
+  # root /var/www/${KOAN_WP_SERVER};
   root /var/www/html;
   index index.php;
   server_name ${KOAN_WP_SERVER};
