@@ -42,7 +42,7 @@ services:
       WORDPRESS_TABLE_PREFIX: koan_
 
   home_wordpress:
-    command: bash -c "ln -s /www/var/html /var/www/${HOME_WP_SERVER}"
+    # command: bash -c "ln -s /www/var/html /var/www/${HOME_WP_SERVER}"
     container_name: ${HOME_WP_CONTAINER}
     depends_on:
       - mysql_wordpress
