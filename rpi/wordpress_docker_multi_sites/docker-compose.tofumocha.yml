@@ -85,7 +85,7 @@ services:
         soft: 32000
         hard: 40000
     volumes:
-      - koan_wordpress_data:/var/www/${KOAN_WP_SERVER}
+      - koan_wordpress_data:/var/www/html
       - home_wordpress_data:/var/www/${HOME_WP_SERVER}
       - ${NGINX_TEMPLATE}
       - ${NGINX_SSL_CERT}
