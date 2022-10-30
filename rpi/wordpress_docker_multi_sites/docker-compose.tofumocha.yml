@@ -19,6 +19,8 @@ services:
       MYSQL_DATABASE: ${WORDPRESS_MYSQL_DB}
       MYSQL_USER: ${WORDPRESS_MYSQL_DB_USER}
       MYSQL_PASSWORD: ${WORDPRESS_MYSQL_DB_PASSW}
+    ports:
+      - ${SITE_IP}:3306:3306
     
   koan_wordpress:
     container_name: ${KOAN_WP_CONTAINER}
@@ -83,7 +85,7 @@ services:
         soft: 32000
         hard: 40000
     volumes:
-      # - koan_wordpress_data:/var/www/html
+      - koan_wordpress_data:/var/www/html
       - ${NGINX_TEMPLATE}
       - ${NGINX_SSL_CERT}
     networks:
