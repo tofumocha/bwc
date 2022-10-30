@@ -1,0 +1,95 @@
+version: "3.9"
+networks:
+  okapia-network:
+    driver: bridge
+    name: ${DOCKER_NETWORK}
+    
+services:
+  mysql_wordpress:
+    container_name: ${WORDPRESS_MYSQL_CONTAINER}
+    image: ${WORDPRESS_MYSQL_VERSION}
+    volumes:
+      - tofumocha_db_data:/var/lib/mysql
+    networks:
+      - okapia-network
+    restart: always
+    environment:
+      TZ: America/New_York
+      MYSQL_ROOT_PASSWORD: ${WORDPRESS_MYSQL_DB_PASSW}
+      MYSQL_DATABASE: ${WORDPRESS_MYSQL_DB}
+      MYSQL_USER: ${WORDPRESS_MYSQL_DB_USER}
+      MYSQL_PASSWORD: ${WORDPRESS_MYSQL_DB_PASSW}
+    
+  koan_wordpress:
+    container_name: ${KOAN_WP_CONTAINER}
+    depends_on:
+      - mysql_wordpress
+    image: ${WORDPRESS_VERSION}
+    volumes:
+      - koan_wordpress_data:/var/www/html
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+    networks:
+      - okapia-network
+    restart: always
+    environment:
+      TZ: America/New_York
+      WORDPRESS_DB_HOST: ${WORDPRESS_MYSQL_CONTAINER}
+      WORDPRESS_DB_USER: ${WORDPRESS_MYSQL_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_MYSQL_DB_PASSW}
+      WORDPRESS_DB: ${WORDPRESS_MYSQL_DB}
+      WORDPRESS_TABLE_PREFIX: koan_
+
+  home_wordpress:
+    container_name: ${HOME_WP_CONTAINER}
+    depends_on:
+      - mysql_wordpress
+    image: ${WORDPRESS_VERSION}
+    volumes:
+      - home_wordpress_data:/var/www/html
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+    networks:
+      - okapia-network
+    restart: always
+    environment:
+      TZ: America/New_York
+      WORDPRESS_DB_HOST: ${WORDPRESS_MYSQL_CONTAINER}
+      WORDPRESS_DB_USER: ${WORDPRESS_MYSQL_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_MYSQL_DB_PASSW}
+      WORDPRESS_DB: ${WORDPRESS_MYSQL_DB}
+      WORDPRESS_TABLE_PREFIX: home_
+  webserver:
+    depends_on:
+      - koan_wordpress
+      - home_wordpress
+    image: ${WORDPRESS_NGINX_VERSION}
+    container_name: ${WORDPRESS_NGINX_CONTAINER}
+    environment:
+      TZ: America/New_York
+      KOAN_WP_SERVER: ${KOAN_WP_SERVER}
+      KOAN_WP_CONTAINER: ${KOAN_WP_CONTAINER}
+      HOME_WP_SERVER: ${HOME_WP_SERVER}
+      HOME_WP_CONTAINER: ${HOME_WP_CONTAINER}
+      KOAN_CRT_PATH: ${KOAN_CRT_PATH}
+      KOAN_KEY_PATH: ${KOAN_KEY_PATH}
+      HOME_CRT_PATH: ${HOME_CRT_PATH}
+      HOME_KEY_PATH: ${HOME_KEY_PATH}
+    ports:
+      - ${SITE_IP}:80:80
+      - ${SITE_IP}:443:443
+    restart: always
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 32000
+        hard: 40000
+    volumes:
+      - site_wordpress_data:/var/www/html
+      - ${NGINX_TEMPLATE}
+      - ${NGINX_SSL_CERT}
+    networks:
+      - okapia-network
+
+volumes:
+ tofumocha_db_data: {}
+ home_wordpress_data: {}
+ koan_wordpress_data: {}

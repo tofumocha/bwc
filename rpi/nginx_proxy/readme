@@ -1,3 +1,0 @@
-apt install -y iputils-ping telnet
-ping koan.tofumocha.com_nginx
-telnet koan.tofumocha.com_nginx 80
