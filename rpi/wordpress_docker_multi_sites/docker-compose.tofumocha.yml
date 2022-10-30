@@ -47,7 +47,7 @@ services:
       - mysql_wordpress
     image: ${WORDPRESS_VERSION}
     volumes:
-      - home_wordpress_data:/var/www/html2
+      - home_wordpress_data:/var/www/html
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     networks:
       - okapia-network
