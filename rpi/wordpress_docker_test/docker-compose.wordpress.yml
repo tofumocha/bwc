@@ -38,7 +38,9 @@ services:
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_MYSQL_DB_PASSW}
       WORDPRESS_DB: ${WORDPRESS_MYSQL_DB}
       WORDPRESS_TABLE_PREFIX: wp_
-    command: ln -s /var/www/html /var/www/site_test
+    # command: ln -s /var/www/html /var/www/site_test
+    command: bash -c "cd /var/www && ln -s html koan.tofumocha.com"
+
 
   webserver:
     depends_on:
